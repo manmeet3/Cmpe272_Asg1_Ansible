@@ -1,0 +1,15 @@
+# CMPE 272
+# Group: Blue Hats
+# File: server-undeploy.yaml -- undeploys nginx from any number of hosts listed in the hosts file
+
+- hosts: all
+  gather_facts: False
+
+  tasks:
+  - name: Stop nginx
+    command: service nginx stop
+
+  - name: Uninstall nginx
+    apt: pkg=nginx state=absent
+
+

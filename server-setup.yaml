@@ -1,0 +1,18 @@
+# CMPE 272 
+# Group: Blue Hats
+# File: server-install.yaml -- installs and copies over custom index.html to any number of hosts listed in hosts.html
+
+- hosts: all
+  gather_facts: False
+
+  tasks:
+   - name: Install nginx via apt
+     apt: pkg=nginx state=installed update_cache=true
+     
+   - name: Copy local index.html to server's nginx root
+     template: 
+        src: index.html.j2 
+        dest: /var/www/html/index.nginx-debian.html
+   - name: Restart nginx
+     command: service nginx restart
+
